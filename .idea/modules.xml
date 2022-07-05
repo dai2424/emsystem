@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Emsystem-parent.iml" filepath="$PROJECT_DIR$/.idea/Emsystem-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emsystem-api/emsystem-api.iml" filepath="$PROJECT_DIR$/emsystem-api/emsystem-api.iml" />
+    </modules>
+  </component>
+</project>
