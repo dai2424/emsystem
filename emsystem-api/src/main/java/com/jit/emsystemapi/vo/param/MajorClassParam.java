@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class MajorClassParam {
-    private String yearSearch;
+    private String gradeSearch;
 
     private String majorSearch;
 

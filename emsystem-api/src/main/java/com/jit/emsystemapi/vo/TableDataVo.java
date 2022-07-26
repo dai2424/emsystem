@@ -5,10 +5,10 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class tableDataVo {
+public class TableDataVo {
     private List<MajorClassVo> tableData;
 
-    public tableDataVo(List<MajorClassVo> majorClassVos) {
+    public TableDataVo(List<MajorClassVo> majorClassVos) {
         this.tableData = majorClassVos;
     }
 }
