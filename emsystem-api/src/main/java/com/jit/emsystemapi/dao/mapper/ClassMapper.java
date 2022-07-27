@@ -19,12 +19,12 @@ public interface ClassMapper extends BaseMapper<Class> {
                     "<if test= 'majorName != null and majorName != \"\"'>"+
                         "and major_name = #{majorName} "+
                     "</if>"+
-                    "<if test= 'classId != null and classId != \"\" '>"+
-                        "and `class_id` = #{classId} "+
+                    "<if test= 'className != null and className != \"\" '>"+
+                        "and `class_name` = #{className} "+
                     "</if>"+
                 "</where>"+
             "</script>"})
-    List<MajorClassVo> selectAllMajorClass(@Param("gradeId") String gradeId, @Param("majorName") String majorName, @Param("classId") String classId);
+    List<MajorClassVo> selectAllMajorClass(@Param("gradeId") String gradeId, @Param("majorName") String majorName, @Param("className") String className);
 
     @Select({"select * from class where class_name = #{className} and major_id = #{majorId};"})
     Class selectClassByName(@Param("className") String className,@Param("majorId") String majorId);

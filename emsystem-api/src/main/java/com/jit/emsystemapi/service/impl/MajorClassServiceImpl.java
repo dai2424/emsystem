@@ -30,9 +30,9 @@ public class MajorClassServiceImpl implements MajorClassService {
 
         String majorName = majorClassParam.getMajorSearch();
 
-        String classId = majorClassParam.getClassSearch();
+        String className = majorClassParam.getClassSearch();
 
-        List<MajorClassVo> majorClassVos = classMapper.selectAllMajorClass(gradeId, majorName, classId);
+        List<MajorClassVo> majorClassVos = classMapper.selectAllMajorClass(gradeId, majorName, className);
 
         return Result.success(new TableDataVo(majorClassVos),"获取成功");
     }

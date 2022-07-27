@@ -43,7 +43,7 @@ public class MajorController {
         return majorClassService.addClass(addClassParam);
     }
 
-    @PostMapping("deleteClass")
+    @PostMapping ("deleteClass")
     public Result deleteClass(@RequestBody DeleteClassParam deleteClassParam)
     {
         return majorClassService.deleteClass(deleteClassParam);
