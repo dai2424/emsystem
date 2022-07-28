@@ -11,4 +11,5 @@ public class GetAllGraduationReqParam {
     private String noSearch;
 
     private String contentSearch;
+
 }

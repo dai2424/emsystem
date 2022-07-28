@@ -10,7 +10,7 @@ import java.util.List;
 public interface GraduationRequirementMapper extends BaseMapper<GraduationRequirement> {
 
     @Select({"<script>"+
-                "select grade_id as gradeId, major_name as majorName, `no` as noSearch, content as contentSearch " +
+                "select grade_id as gradeId, major_name as majorName, `no` as noSearch, content as contentSearch, uid " +
                     "from grade_major natural join graduation_requirement "+
                     "<where>" +
                         "<if test= 'gradeId != null and gradeId != \"\"'>"+
