@@ -11,4 +11,6 @@ public class GraduationReqVo {
     private String noSearch;
 
     private String contentSearch;
+
+    private String uid;
 }
