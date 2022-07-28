@@ -2,7 +2,7 @@ package com.jit.emsystemapi.controller;
 
 import com.jit.emsystemapi.service.MajorClassService;
 import com.jit.emsystemapi.vo.Result;
-import com.jit.emsystemapi.vo.param.*;
+import com.jit.emsystemapi.vo.param.GMC.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

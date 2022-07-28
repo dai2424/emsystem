@@ -2,7 +2,7 @@ package com.jit.emsystemapi.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jit.emsystemapi.dao.pojo.GradeMajor;
-import com.jit.emsystemapi.vo.MajorVo;
+import com.jit.emsystemapi.vo.GMC.MajorVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

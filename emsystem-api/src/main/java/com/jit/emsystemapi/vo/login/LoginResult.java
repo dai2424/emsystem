@@ -1,4 +1,4 @@
-package com.jit.emsystemapi.vo;
+package com.jit.emsystemapi.vo.login;
 
 import lombok.Data;
 

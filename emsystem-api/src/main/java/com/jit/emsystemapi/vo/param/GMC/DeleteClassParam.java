@@ -1,4 +1,4 @@
-package com.jit.emsystemapi.vo.param;
+package com.jit.emsystemapi.vo.param.GMC;
 
 import lombok.Data;
 

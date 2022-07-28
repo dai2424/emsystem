@@ -1,10 +1,10 @@
 package com.jit.emsystemapi.service;
 
 import com.jit.emsystemapi.vo.Result;
-import com.jit.emsystemapi.vo.param.AddClassParam;
-import com.jit.emsystemapi.vo.param.AddMajorParam;
-import com.jit.emsystemapi.vo.param.DeleteClassParam;
-import com.jit.emsystemapi.vo.param.MajorClassParam;
+import com.jit.emsystemapi.vo.param.GMC.AddClassParam;
+import com.jit.emsystemapi.vo.param.GMC.AddMajorParam;
+import com.jit.emsystemapi.vo.param.GMC.DeleteClassParam;
+import com.jit.emsystemapi.vo.param.GMC.MajorClassParam;
 
 public interface MajorClassService {
     public Result getAllMajorClass(MajorClassParam majorClassParam);

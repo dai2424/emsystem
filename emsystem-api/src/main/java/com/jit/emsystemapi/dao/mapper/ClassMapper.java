@@ -2,7 +2,7 @@ package com.jit.emsystemapi.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jit.emsystemapi.dao.pojo.Class;
-import com.jit.emsystemapi.vo.MajorClassVo;
+import com.jit.emsystemapi.vo.GMC.MajorClassVo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

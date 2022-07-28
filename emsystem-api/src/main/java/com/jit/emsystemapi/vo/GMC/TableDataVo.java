@@ -1,5 +1,6 @@
-package com.jit.emsystemapi.vo;
+package com.jit.emsystemapi.vo.GMC;
 
+import com.jit.emsystemapi.vo.GMC.MajorClassVo;
 import lombok.Data;
 
 import java.util.List;
