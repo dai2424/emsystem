@@ -42,10 +42,10 @@ public class GraduationServiceImpl implements GraduationService {
 
     @Override
     public Result deleteGraduationReq(DeleteNoParam deleteNoParam) {
-        List<String> nos = deleteNoParam.getReqArray();
+        List<String> uids = deleteNoParam.getReqArray();
 
-        for(String no : nos) {
-            graduationRequirementMapper.deleteByNo(no);
+        for(String uid : uids) {
+            graduationRequirementMapper.deleteByNo(uid);
         }
         return Result.success(null, "删除成功");
     }

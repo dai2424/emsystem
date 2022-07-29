@@ -32,8 +32,8 @@ public interface GraduationRequirementMapper extends BaseMapper<GraduationRequir
                                               @Param("no") String no,
                                               @Param("content") String content);
 
-    @Delete({"delete from graduation_requirement where no = #{no}"})
-    int deleteByNo(@Param("no") String no);
+    @Delete({"delete from graduation_requirement where uid = #{uid}"})
+    int deleteByNo(@Param("uid") String uid);
 
     @Update({"update graduation_requirement set content = #{content} where uid = #{uid}"})
     Integer updateById(@Param("uid") String uid,@Param("content") String content);
