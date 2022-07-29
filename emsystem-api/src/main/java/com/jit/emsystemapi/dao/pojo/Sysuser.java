@@ -8,7 +8,7 @@ import lombok.Data;
 public class Sysuser {
 
     @TableId(type = IdType.AUTO)
-    private Integer Id;
+    private Integer userId;
 
     private String username;
 

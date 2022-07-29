@@ -45,8 +45,8 @@ public class LoginServiceImpl implements LoginService {
             return Result.fail(400,"用户不存在！");
         }
 
-        String userId = String.valueOf(sysUser.getId());
-        String token = JWTUtils.createToken(Long.valueOf(sysUser.getId()));
+        String userId = String.valueOf(sysUser.getUserId());
+        String token = JWTUtils.createToken(Long.valueOf(sysUser.getUserId()));
 
         return Result.success(new LoginResult(username, token, userId), "登录成功！");
     }
