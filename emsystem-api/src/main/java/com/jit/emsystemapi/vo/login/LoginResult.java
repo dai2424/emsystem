@@ -9,8 +9,11 @@ public class LoginResult {
 
     private String token;
 
-    public LoginResult(String username, String token) {
+    private String userId;
+
+    public LoginResult(String username, String token, String userId) {
         this.username = username;
         this.token = token;
+        this.userId = userId;
     }
 }
