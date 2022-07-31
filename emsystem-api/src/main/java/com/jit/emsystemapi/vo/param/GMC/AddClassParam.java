@@ -6,6 +6,8 @@ import java.util.List;
 
 @Data
 public class AddClassParam {
+    private String userId;
+
     private String gradeId;
 
     private String majorId;

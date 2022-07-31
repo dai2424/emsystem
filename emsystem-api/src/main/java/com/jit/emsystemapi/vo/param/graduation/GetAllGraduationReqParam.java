@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class GetAllGraduationReqParam {
+    private String userId;
+
     private String gradeSearch;
 
     private String majorSearch;

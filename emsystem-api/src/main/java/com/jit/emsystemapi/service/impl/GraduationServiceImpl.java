@@ -30,35 +30,38 @@ public class GraduationServiceImpl implements GraduationService {
     @Override
     public Result getAllGraduationReq(GetAllGraduationReqParam getAllGraduationReqParam) {
 
+        String userid = getAllGraduationReqParam.getUserId();
         String gradeId = getAllGraduationReqParam.getGradeSearch();
         String content = getAllGraduationReqParam.getContentSearch();
         String majorName = getAllGraduationReqParam.getMajorSearch();
         String no = getAllGraduationReqParam.getNoSearch();
 
-        List<GraduationReqVo> GraduationReqs = graduationRequirementMapper.getAllGraduationReq(gradeId, majorName, no, content);
+        List<GraduationReqVo> GraduationReqs = graduationRequirementMapper.getAllGraduationReq(userid, gradeId, majorName, no, content);
 
         return Result.success(new GraduationReqList(GraduationReqs), "获取成功");
     }
 
     @Override
     public Result deleteGraduationReq(DeleteNoParam deleteNoParam) {
+        String userId = deleteNoParam.getUserId();
         List<String> uids = deleteNoParam.getReqArray();
 
         for(String uid : uids) {
-            graduationRequirementMapper.deleteByNo(uid);
+            graduationRequirementMapper.deleteByNo(userId, uid);
         }
         return Result.success(null, "删除成功");
     }
 
     @Override
     public Result editGraduationReq(UpdataGraduationReqParam updataGraduationReqParam) {
+        String userId = updataGraduationReqParam.getUserId();
         String gradeId = updataGraduationReqParam.getGradeSearch();
         String content = updataGraduationReqParam.getContentSearch();
         String no = updataGraduationReqParam.getNoSearch();
         String uid = updataGraduationReqParam.getUid();
         String majorName = updataGraduationReqParam.getMajorSearch();
 
-        if(graduationRequirementMapper.updateById(uid, content) < 1)
+        if(graduationRequirementMapper.updateById(userId, uid, content) < 1)
             return Result.success(null,"毕业要求不存在，更新失败");
         else {
             return Result.success(new UpdataGraduationReqVo(gradeId, majorName, no, content ,uid), "更新成功");
@@ -67,15 +70,16 @@ public class GraduationServiceImpl implements GraduationService {
 
     @Override
     public Result addGraduationReq(AddGraduationReqParam addGraduationReqParam) {
+        String userId = addGraduationReqParam.getUserId();
         String gradeId = addGraduationReqParam.getGradeSearch();
         String majorName = addGraduationReqParam.getMajorSearch();
         String content = addGraduationReqParam.getContentSearch();
 
-        String majorId = gradeMajorMapper.selectMajorId(gradeId, majorName);
+        String majorId = gradeMajorMapper.selectMajorId(userId, gradeId, majorName);
 
-        Integer size = graduationRequirementMapper.selectSizeByMajorId(majorId) + 1;
+        Integer size = graduationRequirementMapper.selectSizeByMajorId(userId, majorId) + 1;
 
-        graduationRequirementMapper.addReq(gradeId, majorId, content, size);
+        graduationRequirementMapper.addReq(userId, gradeId, majorId, content, size);
 
         return Result.success(null, "新增成功");
     }

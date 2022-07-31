@@ -13,6 +13,9 @@ public interface ClassMapper extends BaseMapper<Class> {
                 "select grade_id as gradeId, major_name as majorName, class_id as classId, class_name as className"+
                 " from class natural join grade_major"+
                 "<where>" +
+                    "<if test= 'userId != null and userId != \"\"'>"+
+                        "and user_id = #{userId} "+
+                    "</if>"+
                     "<if test= 'gradeId != null and gradeId != \"\"'>"+
                         "and grade_id = #{gradeId} "+
                     "</if>"+
@@ -24,17 +27,17 @@ public interface ClassMapper extends BaseMapper<Class> {
                     "</if>"+
                 "</where>"+
             "</script>"})
-    List<MajorClassVo> selectAllMajorClass(@Param("gradeId") String gradeId, @Param("majorName") String majorName, @Param("className") String className);
+    List<MajorClassVo> selectAllMajorClass(@Param("userId") String userId, @Param("gradeId") String gradeId, @Param("majorName") String majorName, @Param("className") String className);
 
-    @Select({"select * from class where class_name = #{className} and major_id = #{majorId};"})
-    Class selectClassByName(@Param("className") String className,@Param("majorId") String majorId);
+    @Select({"select * from class where class_name = #{className} and major_id = #{majorId} and user_id = #{userId};"})
+    Class selectClassByName(@Param("userId") String userId, @Param("className") String className, @Param("majorId") String majorId);
 
-    @Insert({"insert into class(major_id, class_name) values(#{majorId}, #{className});"})
-    int addClassByName(@Param("majorId") String majorId, @Param("className") String classname);
+    @Insert({"insert into class(user_id, major_id, class_name) values(#{userId}, #{majorId}, #{className});"})
+    int addClassByName(@Param("userId") String userId, @Param("majorId") String majorId, @Param("className") String classname);
 
-    @Select({"select * from class where class_id = #{classId}"})
-    Class selectClassById(@Param("classId") String classId);
+    @Select({"select * from class where class_id = #{classId} and user_id = #{userId}"})
+    Class selectClassById(@Param("userId") String id, @Param("classId") String classId);
 
-    @Delete({"delete from class where class_id = #{classId};"})
-    int deleteClassById(@Param("classId") String classId);
+    @Delete({"delete from class where class_id = #{classId} and user_id = #{userId};"})
+    int deleteClassById(@Param("userId") String userId, @Param("classId") String classId);
 }

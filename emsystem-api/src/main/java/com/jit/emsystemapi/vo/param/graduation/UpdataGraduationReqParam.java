@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class UpdataGraduationReqParam {
+    private String userId;
+
     private String uid;
 
     private String gradeSearch;

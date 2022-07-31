@@ -13,11 +13,11 @@ import java.util.List;
 @Mapper
 public interface GradeMajorMapper extends BaseMapper<GradeMajor> {
 
-    @Select({"select distinct grade_id from grade_major"})
-    List<String> getAllGrade();
+    @Select({"select distinct grade_id from grade_major where user_id = #{userId}"})
+    List<String> getAllGrade(@Param("userId") String userId);
 
-    @Select({"select major_id as id, major_name as label from grade_major where grade_id = #{gradeId}"})
-    List<MajorVo> getMajorByGradeId(String gradeId);
+    @Select({"select major_id as id, major_name as label from grade_major where grade_id = #{gradeId} and user_id = #{userId}"})
+    List<MajorVo> getMajorByGradeId(@Param("userId") String userId,@Param("gradeId")  String gradeId);
 
 //    "<script>"+
 //            "select grade_id as gradeId, major_name as majorName, class_id as classId, class_name as className"+
@@ -42,14 +42,14 @@ public interface GradeMajorMapper extends BaseMapper<GradeMajor> {
 //            "</script>"})
 //    GradeMajor selectByGradeIdMajorName(@Param("userId") String userId,  @Param("gradeId") String gradeId,@Param("majorName") String majorName);
 
-    @Insert({"insert into grade_major(grade_id, major_name) values( #{gradeId}, #{majorName})"})
-    int addMajor(@Param("gradeId") String gradeId,@Param("majorName") String majorName);
+    @Insert({"insert into grade_major(user_id, grade_id, major_name) values(#{userId}, #{gradeId}, #{majorName})"})
+    int addMajor(@Param("userId") String userId, @Param("gradeId") String gradeId, @Param("majorName") String majorName);
 
-    @Select({"select * from grade_major where grade_id = #{gradeId} and major_id = #{majorId};"})
-    GradeMajor selectByGradeIdMajorId(@Param("gradeId") String gradeId, @Param("majorId") String majorId);
+    @Select({"select * from grade_major where grade_id = #{gradeId} and major_id = #{majorId} and user_id = #{userId};"})
+    GradeMajor selectByGradeIdMajorId(@Param("userId") String userId, @Param("gradeId") String gradeId, @Param("majorId") String majorId);
 
-    @Select({"select major_id from grade_major where grade_id = #{gradeId} and major_name = #{majorName}"})
-    String selectMajorId(@Param("gradeId") String gradeId,@Param("majorName") String majorName);
+    @Select({"select major_id from grade_major where grade_id = #{gradeId} and major_name = #{majorName} and user_id = #{userId}"})
+    String selectMajorId(@Param("userId") String userId, @Param("gradeId") String gradeId, @Param("majorName") String majorName);
 
 //    @Select({"select count(*) from grade_major where grade_id = #{gradeId} and major_name = #{majorName}"})
 //    Integer selectSize(@Param("gradeId") String gradeId,@Param("majorName") String majorName);

@@ -6,9 +6,9 @@ import lombok.Data;
 public class AddTPParam {
     private String userId;
 
-    private String yearId;
-
-    private String majorId;
+//    private String yearId;
+//
+//    private String majorId;
 
     private String uid;
 

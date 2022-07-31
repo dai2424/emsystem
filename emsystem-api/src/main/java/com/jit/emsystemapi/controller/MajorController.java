@@ -23,12 +23,12 @@ public class MajorController {
     @PostMapping("getMajor")
     public Result getMajorByGradeId(@RequestBody GetMajorParam getMajorParam)
     {
-        return majorClassService.getMajorByGradeId(getMajorParam.getGradeId());
+        return majorClassService.getMajorByGradeId(getMajorParam);
     }
 
-    @GetMapping("getAllGrade")
-    public Result getAllGrade(){
-        return majorClassService.getAllGrade();
+    @PostMapping("getAllGrade")
+    public Result getAllGrade(@RequestBody GetAllgrade getAllgrade ){
+        return majorClassService.getAllGrade(getAllgrade);
     }
 
     @PostMapping("addMajor")

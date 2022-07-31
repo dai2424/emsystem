@@ -34,8 +34,6 @@ public class TargetPointServiceImpl implements TargetPointService {
     @Override
     public Result addTargetPoint(AddTPParam addTPParam) {
         String userId = addTPParam.getUserId();
-        String gradeId = addTPParam.getYearId();
-        String majorId = addTPParam.getMajorId();
         String pointNo = addTPParam.getPointNo();
         String content = addTPParam.getPointContent();
         String uid = addTPParam.getUid();

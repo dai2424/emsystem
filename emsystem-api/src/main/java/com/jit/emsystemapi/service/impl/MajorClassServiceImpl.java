@@ -6,10 +6,7 @@ import com.jit.emsystemapi.service.GradeMajorSercive;
 import com.jit.emsystemapi.service.MajorClassService;
 import com.jit.emsystemapi.vo.*;
 import com.jit.emsystemapi.vo.GMC.*;
-import com.jit.emsystemapi.vo.param.GMC.AddClassParam;
-import com.jit.emsystemapi.vo.param.GMC.AddMajorParam;
-import com.jit.emsystemapi.vo.param.GMC.DeleteClassParam;
-import com.jit.emsystemapi.vo.param.GMC.MajorClassParam;
+import com.jit.emsystemapi.vo.param.GMC.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +26,7 @@ public class MajorClassServiceImpl implements MajorClassService {
 
     @Override
     public Result getAllMajorClass(MajorClassParam majorClassParam) {
+        String userId = majorClassParam.getUserId();
 
         String gradeId = majorClassParam.getGradeSearch();
 
@@ -36,14 +34,16 @@ public class MajorClassServiceImpl implements MajorClassService {
 
         String className = majorClassParam.getClassSearch();
 
-        List<MajorClassVo> majorClassVos = classMapper.selectAllMajorClass(gradeId, majorName, className);
+        List<MajorClassVo> majorClassVos = classMapper.selectAllMajorClass(userId, gradeId, majorName, className);
 
         return Result.success(new TableDataVo(majorClassVos),"获取成功");
     }
 
     @Override
-    public Result getAllGrade() {
-        List<String> allGrade = gradeMajorMapper.getAllGrade();
+    public Result getAllGrade(GetAllgrade getAllgrade) {
+        String userId = getAllgrade.getUserId();
+
+        List<String> allGrade = gradeMajorMapper.getAllGrade(userId);
 
         List<GradeVo> gradeVos = new ArrayList<>();
 
@@ -54,8 +54,10 @@ public class MajorClassServiceImpl implements MajorClassService {
     }
 
     @Override
-    public Result getMajorByGradeId(String gradeId) {
-        List<MajorVo> majorVos = gradeMajorMapper.getMajorByGradeId(gradeId);
+    public Result getMajorByGradeId(GetMajorParam getMajorParam) {
+        String gradeId = getMajorParam.getGradeId();
+        String userId = getMajorParam.getUserId();
+        List<MajorVo> majorVos = gradeMajorMapper.getMajorByGradeId(userId, gradeId);
         return Result.success(new MajorDataVo(majorVos), "获取成功");
     }
 
@@ -66,9 +68,9 @@ public class MajorClassServiceImpl implements MajorClassService {
         List<String> majorNames = addMajorParam.getMajorArray();
 
         for (String majorName: majorNames) {
-            if(gradeMajorSercive.selectByGradeIdMajorName(userId, gradeId, majorName) == null)
+            if(gradeMajorSercive.selectByGradeIdMajorName(userId, gradeId, majorName).isEmpty())
             {
-                gradeMajorMapper.addMajor(gradeId, majorName);
+                gradeMajorMapper.addMajor(userId, gradeId, majorName);
             }
         }
         return Result.success(null, "添加成功");
@@ -76,16 +78,17 @@ public class MajorClassServiceImpl implements MajorClassService {
 
     @Override
     public Result addClass(AddClassParam addClassParam) {
+        String userId = addClassParam.getUserId();
         String gradeId = addClassParam.getGradeId();
         String majorId = addClassParam.getMajorId();
         List<String> classNames = addClassParam.getClassArray();
 
-        if(gradeMajorMapper.selectByGradeIdMajorId(gradeId, majorId) != null)
+        if(gradeMajorMapper.selectByGradeIdMajorId(userId, gradeId, majorId) != null)
         {
             for(String classname:classNames) {
-                if(classMapper.selectClassByName(classname, majorId) == null)
+                if(classMapper.selectClassByName(userId, classname, majorId) == null)
                 {
-                    classMapper.addClassByName(majorId,classname);
+                    classMapper.addClassByName(userId, majorId,classname);
                 }
             }
         }
@@ -98,12 +101,13 @@ public class MajorClassServiceImpl implements MajorClassService {
 
     @Override
     public Result deleteClass(DeleteClassParam deleteClassParam) {
+        String userId = deleteClassParam.getUserId();
 
         List<String> classIds = deleteClassParam.getClassArray();
 
         for(String classId : classIds) {
-            if(classMapper.selectClassById(classId) != null) {
-                classMapper.deleteClassById(classId);
+            if(classMapper.selectClassById(userId, classId) != null) {
+                classMapper.deleteClassById(userId,classId);
             }
         }
         return Result.success(null,"删除成功");
