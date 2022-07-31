@@ -88,9 +88,10 @@ public class TargetPointServiceImpl implements TargetPointService {
             List<GraduationRequirement> grs = graduationRequirementService.selectUidByMajorIdNo(userId, gradeMajor.getMajorId(), graduationNo);
             for (GraduationRequirement gr : grs) {
                 String uid = String.valueOf(gr.getUid());
-                TargetPoint tp = targetPointMapper.selectByUNC(userId, uid, pointNo, pointContent);
-                if(tp != null)
+                List<TargetPoint> tps = targetPointMapper.selectByUNC(userId, uid, pointNo, pointContent);
+                for(TargetPoint tp : tps) {
                     vos.add(new GetAllVo(userId, gradeMajor.getGradeId(), gradeMajor.getMajorName(), uid, gr.getNo(), tp.getTpNo(), tp.getTpId(), tp.getContent()));
+                }
             }
         }
 

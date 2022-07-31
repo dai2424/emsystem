@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jit.emsystemapi.dao.pojo.TargetPoint;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface TargetPointMapper extends BaseMapper<TargetPoint> {
 
@@ -40,8 +42,8 @@ public interface TargetPointMapper extends BaseMapper<TargetPoint> {
                         "</if>"+
                     "</where>" +
             "</script>"})
-    TargetPoint selectByUNC(@Param("userId") String userId,
-                            @Param("uid") String uid,
-                            @Param("pointNo") String pointNo,
-                            @Param("content") String pointContent);
+    List<TargetPoint> selectByUNC(@Param("userId") String userId,
+                                  @Param("uid") String uid,
+                                  @Param("pointNo") String pointNo,
+                                  @Param("content") String pointContent);
 }
