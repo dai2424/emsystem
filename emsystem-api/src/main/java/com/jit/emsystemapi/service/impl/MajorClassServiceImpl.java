@@ -2,6 +2,7 @@ package com.jit.emsystemapi.service.impl;
 
 import com.jit.emsystemapi.dao.mapper.ClassMapper;
 import com.jit.emsystemapi.dao.mapper.GradeMajorMapper;
+import com.jit.emsystemapi.service.GradeMajorSercive;
 import com.jit.emsystemapi.service.MajorClassService;
 import com.jit.emsystemapi.vo.*;
 import com.jit.emsystemapi.vo.GMC.*;
@@ -23,6 +24,8 @@ public class MajorClassServiceImpl implements MajorClassService {
     private ClassMapper classMapper;
     @Autowired
     private GradeMajorMapper gradeMajorMapper;
+    @Autowired
+    private GradeMajorSercive gradeMajorSercive;
 
     @Override
     public Result getAllMajorClass(MajorClassParam majorClassParam) {
@@ -58,11 +61,12 @@ public class MajorClassServiceImpl implements MajorClassService {
 
     @Override
     public Result addMajor(AddMajorParam addMajorParam) {
+        String userId = addMajorParam.getUserId();
         String gradeId = addMajorParam.getGradeId();
         List<String> majorNames = addMajorParam.getMajorArray();
 
         for (String majorName: majorNames) {
-            if(gradeMajorMapper.selectByGradeIdMajorName(gradeId, majorName) == null)
+            if(gradeMajorSercive.selectByGradeIdMajorName(userId, gradeId, majorName) == null)
             {
                 gradeMajorMapper.addMajor(gradeId, majorName);
             }

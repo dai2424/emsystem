@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
-public class GradeMajor {
+public class TargetPoint {
+
     private Integer userId;
 
+    private Integer uid;
+
     @TableId(type = IdType.AUTO)
-    private Integer majorId;
+    private Integer tpId;
 
-    private Integer gradeId;
+    private String tpNo;
 
-    private String majorName;
+    private String content;
 }

@@ -19,8 +19,28 @@ public interface GradeMajorMapper extends BaseMapper<GradeMajor> {
     @Select({"select major_id as id, major_name as label from grade_major where grade_id = #{gradeId}"})
     List<MajorVo> getMajorByGradeId(String gradeId);
 
-    @Select({"select * from grade_major where grade_id = #{gradeId} and major_name = #{majorName} limit 1"})
-    GradeMajor selectByGradeIdMajorName(@Param("gradeId") String gradeId,@Param("majorName") String majorName);
+//    "<script>"+
+//            "select grade_id as gradeId, major_name as majorName, class_id as classId, class_name as className"+
+//            " from class natural join grade_major"+
+//            "<where>" +
+//            "<if test= 'gradeId != null and gradeId != \"\"'>"+
+//            "and grade_id = #{gradeId} "+
+//            "</if>"+
+//            "<if test= 'majorName != null and majorName != \"\"'>"+
+//            "and major_name = #{majorName} "+
+//            "</if>"+
+//            "<if test= 'className != null and className != \"\" '>"+
+//            "and `class_name` = #{className} "+
+//            "</if>"+
+//            "</where>"+
+//    "</script>"
+//    @Select({"<script>" +
+//            "select * from grade_major " +
+//                "<where> " +
+//                    "grade_id = #{gradeId} and major_name = #{majorName} and user_id = #{userId}" +
+//                "</where>" +
+//            "</script>"})
+//    GradeMajor selectByGradeIdMajorName(@Param("userId") String userId,  @Param("gradeId") String gradeId,@Param("majorName") String majorName);
 
     @Insert({"insert into grade_major(grade_id, major_name) values( #{gradeId}, #{majorName})"})
     int addMajor(@Param("gradeId") String gradeId,@Param("majorName") String majorName);

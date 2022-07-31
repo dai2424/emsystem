@@ -46,4 +46,21 @@ public interface GraduationRequirementMapper extends BaseMapper<GraduationRequir
                 @Param("majorId") String majorId,
                 @Param("content") String content,
                 @Param("no") Integer size);
+
+    @Select({"<script>"+
+            "select * " +
+            "from graduation_requirement "+
+                "<where>" +
+                    "<if test= 'userId != null and userId != \"\"'>"+
+                        "and user_id = #{userId} "+
+                    "</if>"+
+                    "<if test= 'majorId != null '>"+
+                        "and major_id = #{majorId} "+
+                    "</if>"+
+                    "<if test= 'no != null and no != \"\" '>"+
+                        "and `no` = #{no} "+
+                    "</if>"+
+                "</where>"+
+            "</script>"})
+    List<GraduationRequirement> selectUids(@Param("userId") String userId,@Param("majorId") Integer majorId,@Param("no") String graduationNo);
 }
