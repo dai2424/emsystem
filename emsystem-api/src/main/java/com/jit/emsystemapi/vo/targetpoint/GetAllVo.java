@@ -14,18 +14,21 @@ public class GetAllVo {
 
     private String graduationNo;
 
+    private String graduationContent;
+
     private String pointNo;
 
     private String pointId;
 
     private String pointContent;
 
-    public GetAllVo(String userId,Integer gradeId, String majorName, String uid, String graduationNo, String tpNo, Integer tpId, String content) {
+    public GetAllVo(String userId,Integer gradeId, String majorName, String uid, String graduationNo,String graduationContent, String tpNo, Integer tpId, String content) {
         this.userId = userId;
         this.yearId = String.valueOf(gradeId);
         this.majorName = majorName;
         this.uid = uid;
         this.graduationNo = graduationNo;
+        this.graduationContent = graduationContent;
         this.pointNo = tpNo;
         this.pointId = String.valueOf(tpId);
         this.pointContent = content;
