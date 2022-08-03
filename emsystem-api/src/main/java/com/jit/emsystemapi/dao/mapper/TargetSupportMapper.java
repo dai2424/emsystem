@@ -22,4 +22,7 @@ public interface TargetSupportMapper extends BaseMapper<TargetSupport> {
     Integer updateGradeNum(@Param("userId") String userId,
                         @Param("typeEncoding") String typeEncoding,
                         @Param("gradeNum") String gradeNum);
+
+    @Select({"select rank_num from target_support where user_id = #{userId} and type_encoding = '支撑数';"})
+    int selectMaxDegree(@Param("userId") String userId);
 }

@@ -46,4 +46,17 @@ public interface TargetPointMapper extends BaseMapper<TargetPoint> {
                                   @Param("uid") String uid,
                                   @Param("pointNo") String pointNo,
                                   @Param("content") String pointContent);
+    @Select({"<script> " +
+            "select * from target_point " +
+                "<where> " +
+                "<if test = 'userId != null and userId != \"\"' > "+
+                    "and user_id = #{userId} " +
+                "</if>" +
+                "<if test= 'content != null and content != \"\" '>"+
+                    " and content  LIKE  CONCAT('%',#{content},'%') "+
+                "</if>"+
+            "</where>" +
+            "</script>"})
+    List<TargetPoint> selectByContent(@Param("userId") String userId,
+                                      @Param("content") String pointContent);
 }
