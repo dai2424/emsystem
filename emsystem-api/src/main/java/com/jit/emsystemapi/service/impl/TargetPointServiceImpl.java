@@ -91,7 +91,7 @@ public class TargetPointServiceImpl implements TargetPointService {
                 String gradContent = gr.getContent();
                 List<TargetPoint> tps = targetPointMapper.selectByUNC(userId, uid, pointNo, pointContent);
                 for(TargetPoint tp : tps) {
-                    vos.add(new GetAllVo(userId, gradeMajor.getGradeId(), gradeMajor.getMajorName(), uid, gradContent, gr.getNo(), tp.getTpNo(), tp.getTpId(), tp.getContent()));
+                    vos.add(new GetAllVo(userId, gradeMajor.getGradeId(), gradeMajor.getMajorName(), uid,  gr.getNo(), gradContent,tp.getTpNo(), tp.getTpId(), tp.getContent()));
                 }
             }
         }
