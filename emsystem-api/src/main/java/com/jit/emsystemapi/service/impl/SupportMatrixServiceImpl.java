@@ -143,6 +143,10 @@ public class SupportMatrixServiceImpl implements SupportMatrixService {
             for(String courseNo : courseNos) {
                 sms.addAll(supportMatrixMapper.selectCourse(userId, tpId, courseNo));
             }
+
+            /* 如果没有传课程名的话数据的话，不会查出courseNo*/
+            if(courseNos.isEmpty()) sms.addAll(supportMatrixMapper.selectCourse(userId, tpId, null));
+
             for (SupportMatrix sm : sms) {
                 String cname = trainingPlanMapper.selectName(userId, sm.getCourseNo());
                 mxs.add(new MatrixVo(sm.getCourseNo(), tpContent, sm.getSupportDegree(), tpId, cname));
