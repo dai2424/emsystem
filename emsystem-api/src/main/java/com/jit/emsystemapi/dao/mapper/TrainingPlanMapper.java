@@ -55,6 +55,9 @@ public interface TrainingPlanMapper extends BaseMapper<TrainingPlan> {
     @Select({"select course_no from training_plan where user_id = #{userId} and course_name = #{courseName};"})
     String selectNobyName(@Param("userId") String userId,@Param("courseName") String courseName);
 
+    @Select({"select course_no from training_plan where user_id = #{userId} and course_name LIKE  CONCAT('%',#{courseName},'%');"})
+    List<String> selectNosbyName(@Param("userId") String userId,@Param("courseName") String courseName);
+
     @Select({"select course_name from training_plan where user_id = #{userId} and course_no = #{courseNo};"})
     String selectName(@Param("userId") String userId,@Param("courseNo") String courseNo);
 }

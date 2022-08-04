@@ -121,7 +121,15 @@ public class SupportMatrixServiceImpl implements SupportMatrixService {
         String userId = getAllCourseParam.getUserId();
         String pointContent = getAllCourseParam.getPointContent();
 
-        String courseNo = trainingPlanMapper.selectNobyName(userId, courseName);
+        List<String> courseNos = new ArrayList<>();
+        if(!StringUtils.isBlank(courseName))
+            courseNos.addAll(trainingPlanMapper.selectNosbyName(userId, courseName));
+
+        if(courseNos.isEmpty() && !StringUtils.isBlank(courseName))
+        {
+            return Result.success(null,"课程名关键字不存在");
+        }
+
         List<TargetPoint> tps = targetPointMapper.selectByContent(userId, pointContent);
 
         List<MatrixVo> mxs = new ArrayList<>();
@@ -130,8 +138,11 @@ public class SupportMatrixServiceImpl implements SupportMatrixService {
             String tpContent = tp.getContent();
             String tpId = String.valueOf(tp.getTpId());
 
-            List<SupportMatrix> sms = supportMatrixMapper.selectCourse(userId,tpId, courseNo);
+            List<SupportMatrix> sms = new ArrayList<>();
 
+            for(String courseNo : courseNos) {
+                sms.addAll(supportMatrixMapper.selectCourse(userId, tpId, courseNo));
+            }
             for (SupportMatrix sm : sms) {
                 String cname = trainingPlanMapper.selectName(userId, sm.getCourseNo());
                 mxs.add(new MatrixVo(sm.getCourseNo(), tpContent, sm.getSupportDegree(), tpId, cname));
