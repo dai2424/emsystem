@@ -4,9 +4,13 @@ import lombok.Data;
 
 @Data
 public class Teacher {
-    private String teacherNumber;
+    private Integer userId;
 
-    private String teacherPassword;
+    private String tNo;
 
-    private Integer courseNo;
+    private String tName;
+
+    private String tPassword;
+
+    private boolean status;
 }
