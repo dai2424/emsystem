@@ -3,6 +3,7 @@ package com.jit.emsystemapi.service;
 import com.jit.emsystemapi.vo.Result;
 import com.jit.emsystemapi.vo.param.login.LoginParam;
 import com.jit.emsystemapi.vo.param.login.RegisterParam;
+import com.jit.emsystemapi.vo.param.login.TeacherLoginParam;
 import com.jit.emsystemapi.vo.param.login.UpDataPasswordParam;
 
 public interface LoginService {
@@ -17,4 +18,6 @@ public interface LoginService {
     Result register(RegisterParam registerParam);
 
     Result upDataPassword(UpDataPasswordParam upDataPasswordParam);
+
+    Result teacherLogin(TeacherLoginParam teacherLoginParam);
 }

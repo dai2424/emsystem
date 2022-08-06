@@ -44,9 +44,10 @@ public class TeacherServiceImpl implements TeacherService {
         String userId = editTeacherParam.getUserId();
         String teacherNo = editTeacherParam.getTeacherNo();
         String teacherPassword = editTeacherParam.getTeacherPassword();
+        String teacherName = editTeacherParam.getTeacherName();
 
         if(teacherMapper.selectByNo(userId, teacherNo) != null) {
-            teacherMapper.editPassword(userId, teacherNo, teacherPassword);
+            teacherMapper.editPassword(userId, teacherNo, teacherName, teacherPassword);
         }
         else {
             return Result.success(null,"教师号不存在");

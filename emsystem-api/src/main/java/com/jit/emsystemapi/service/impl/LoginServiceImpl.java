@@ -2,14 +2,18 @@ package com.jit.emsystemapi.service.impl;
 
 import com.alibaba.excel.util.StringUtils;
 import com.jit.emsystemapi.dao.mapper.SysuserMapper;
+import com.jit.emsystemapi.dao.mapper.TeacherMapper;
 import com.jit.emsystemapi.dao.pojo.Sysuser;
+import com.jit.emsystemapi.dao.pojo.Teacher;
 import com.jit.emsystemapi.service.LoginService;
 import com.jit.emsystemapi.service.SysuserService;
 import com.jit.emsystemapi.utils.JWTUtils;
 import com.jit.emsystemapi.vo.Result;
+import com.jit.emsystemapi.vo.login.UserIdVo;
 import com.jit.emsystemapi.vo.param.login.LoginParam;
 import com.jit.emsystemapi.vo.login.LoginResult;
 import com.jit.emsystemapi.vo.param.login.RegisterParam;
+import com.jit.emsystemapi.vo.param.login.TeacherLoginParam;
 import com.jit.emsystemapi.vo.param.login.UpDataPasswordParam;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -26,6 +30,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private SysuserMapper sysuserMapper;
+
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     private static final String slat = "@jit";
     @Override
@@ -88,6 +95,24 @@ public class LoginServiceImpl implements LoginService {
         sysuserMapper.updatePassword(username, password, newPassword);
 
         return Result.success(null, "修改成功");
+    }
+
+    @Override
+    public Result teacherLogin(TeacherLoginParam teacherLoginParam) {
+        String teacherNo = teacherLoginParam.getTeacherNo();
+        String teacherPassword = teacherLoginParam.getTeacherPassword();
+
+        Teacher teacher = teacherMapper.selectUserId(teacherNo, teacherPassword);
+
+        if(ObjectUtils.isEmpty(teacher)) {
+            return Result.success(null, "用户不存在");
+        }
+        else if(teacher.getStatus() == false) {
+            return Result.success(null,"用户账号异常，请联系管理员");
+        }
+        else {
+            return Result.success(new UserIdVo(teacher.getUserId()), "登录成功");
+        }
     }
 
 //    public static void main(String[] args) {

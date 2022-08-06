@@ -18,9 +18,10 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
                     @Param("teacherName") String teacherName,
                     @Param("teacherPassword") String teacherPassword);
 
-    @Update({"update teacher set t_password = #{teacherPassword} where user_id = #{userId} and t_no = #{teacherNo}"})
+    @Update({"update teacher set t_password = #{teacherPassword}, t_name = #{teacherName} where user_id = #{userId} and t_no = #{teacherNo}"})
     void editPassword(@Param("userId") String userId,
                       @Param("teacherNo") String teacherNo,
+                      @Param("teacherName") String teacherName,
                       @Param("teacherPassword") String teacherPassword);
 
     @Delete({"delete from teacher where user_id = #{userId} and t_no = #{teacherNo};"})
@@ -47,4 +48,7 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
 
     @Update({"update teacher set status = #{status} where user_id = #{userId} and t_no = #{teacherNo}; "})
     void editStatus(@Param("userId") String userId,@Param("teacherNo") String teacherNo,@Param("status") boolean status);
+
+    @Select({"select * from teacher where t_no = #{teacherNo} and t_password = #{teacherPassword}"})
+    Teacher selectUserId(@Param("teacherNo") String teacherNo,@Param("teacherPassword") String teacherPassword);
 }

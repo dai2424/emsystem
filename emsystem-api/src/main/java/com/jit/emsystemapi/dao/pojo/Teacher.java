@@ -12,5 +12,5 @@ public class Teacher {
 
     private String tPassword;
 
-    private boolean status;
+    private Boolean status;
 }

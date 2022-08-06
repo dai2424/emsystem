@@ -5,6 +5,7 @@ import com.jit.emsystemapi.service.LoginService;
 import com.jit.emsystemapi.vo.Result;
 import com.jit.emsystemapi.vo.param.login.LoginParam;
 import com.jit.emsystemapi.vo.param.login.RegisterParam;
+import com.jit.emsystemapi.vo.param.login.TeacherLoginParam;
 import com.jit.emsystemapi.vo.param.login.UpDataPasswordParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,10 @@ public class LoginController {
     @PostMapping("updatePassword")
     public Result updatePassword(@RequestBody UpDataPasswordParam upDataPasswordParam) {
         return loginService.upDataPassword(upDataPasswordParam);
+    }
+
+    @PostMapping("teacherLogin")
+    public Result teacherLogin(@RequestBody TeacherLoginParam teacherLoginParam){
+        return loginService.teacherLogin(teacherLoginParam);
     }
 }
