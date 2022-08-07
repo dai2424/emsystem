@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+@Mapper
 public interface TeacherMapper extends BaseMapper<Teacher> {
 
     @Select({"select * from teacher where user_id = #{userId} and t_no = #{teacherNo}"})

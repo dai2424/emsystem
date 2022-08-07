@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+@Mapper
 public interface TrainingPlanMapper extends BaseMapper<TrainingPlan> {
     @Select({"select count(*) from training_plan where user_id = #{userId} and course_no =  #{courseNo}"})
     int selectByNo(@Param("userId") String userId, @Param("courseNo") String courseNo);

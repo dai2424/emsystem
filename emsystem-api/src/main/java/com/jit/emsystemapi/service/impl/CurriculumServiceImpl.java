@@ -4,6 +4,7 @@ import com.alibaba.excel.util.StringUtils;
 import com.jit.emsystemapi.dao.mapper.*;
 import com.jit.emsystemapi.dao.pojo.Class;
 import com.jit.emsystemapi.dao.pojo.GradeMajor;
+import com.jit.emsystemapi.dao.pojo.SupportMatrix;
 import com.jit.emsystemapi.dao.pojo.Teacher;
 import com.jit.emsystemapi.service.CurriculumService;
 import com.jit.emsystemapi.vo.Result;
@@ -35,6 +36,12 @@ public class CurriculumServiceImpl implements CurriculumService {
 
     @Autowired
     private TrainingPlanMapper trainingPlanMapper;
+
+    @Autowired
+    private SupportMatrixMapper supportMatrixMapper;
+
+    @Autowired
+    private ClassCourseAchieveMapper classCourseAchieveMapper;
 
     @Override
     public Result getGradeMajorClass(GetGMCParam getGMCParam) {
@@ -110,6 +117,13 @@ public class CurriculumServiceImpl implements CurriculumService {
         }
 
         curriculumMapper.addPlan(userId, teacherNo, courseNo, classId, arrangeTerm, majorId);
+
+        /* 为创建课程达成度的记录，达成度默认为null */
+        List<SupportMatrix> sms = supportMatrixMapper.selectCourse(userId,null, courseNo);
+        for(SupportMatrix sm : sms) {
+            Integer tpId = sm.getTpId();
+            classCourseAchieveMapper.addData(userId, teacherNo, classId, majorId, courseNo, tpId, arrangeTerm);
+        }
 
         return Result.success(null,"添加成功");
     }
