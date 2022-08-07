@@ -123,7 +123,7 @@ public class SupportMatrixServiceImpl implements SupportMatrixService {
 
         List<String> courseNos = new ArrayList<>();
         if(!StringUtils.isBlank(courseName))
-            courseNos.addAll(trainingPlanMapper.selectNosbyName(userId, courseName));
+            courseNos.addAll(trainingPlanMapper.selectNosByName(userId, courseName));
 
         if(courseNos.isEmpty() && !StringUtils.isBlank(courseName))
         {

@@ -2,9 +2,7 @@ package com.jit.emsystemapi.controller;
 
 import com.jit.emsystemapi.service.CurriculumService;
 import com.jit.emsystemapi.vo.Result;
-import com.jit.emsystemapi.vo.param.curriculum.AddCurriculumParam;
-import com.jit.emsystemapi.vo.param.curriculum.GetGMCParam;
-import com.jit.emsystemapi.vo.param.curriculum.GetTeacherIdParam;
+import com.jit.emsystemapi.vo.param.curriculum.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +26,15 @@ public class CurriculumController {
     @PostMapping("addCurriculum")
     public Result addCurriculum(@RequestBody AddCurriculumParam addCurriculumParam) {
         return curriculumService.addCurriculum(addCurriculumParam);
+    }
+
+    @PostMapping("getAllCurriculum")
+    public Result getAllCurriculum(@RequestBody GetAllCurriculumParam getAllCurriculumParam){
+        return curriculumService.getAllCurriculum(getAllCurriculumParam);
+    }
+
+    @PostMapping("deleteCurriculum")
+    public Result deleteCurriculum(@RequestBody DeleteCurriculumParam deleteCurriculumParam){
+        return curriculumService.deleteCurriculum(deleteCurriculumParam);
     }
 }

@@ -1,9 +1,7 @@
 package com.jit.emsystemapi.service;
 
 import com.jit.emsystemapi.vo.Result;
-import com.jit.emsystemapi.vo.param.curriculum.AddCurriculumParam;
-import com.jit.emsystemapi.vo.param.curriculum.GetGMCParam;
-import com.jit.emsystemapi.vo.param.curriculum.GetTeacherIdParam;
+import com.jit.emsystemapi.vo.param.curriculum.*;
 
 public interface CurriculumService {
     Result getGradeMajorClass(GetGMCParam getGMCParam);
@@ -11,4 +9,9 @@ public interface CurriculumService {
     Result getTeacherId(GetTeacherIdParam getTeacherIdParam);
 
     Result addCurriculum(AddCurriculumParam addCurriculumParam);
+
+    Result getAllCurriculum(GetAllCurriculumParam getAllCurriculumParam);
+
+    Result deleteCurriculum(DeleteCurriculumParam deleteCurriculumParam);
+
 }

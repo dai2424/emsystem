@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class TeacherVo {
-    private String value;
     private String label;
+    private String value;
 
-    public TeacherVo(String value, String name) {
-        this.value = value;
-        this.label = name + " " + value;
+    public TeacherVo(String label, String name) {
+        this.value = name + " " + label;
+        this.label = label;
     }
 }
