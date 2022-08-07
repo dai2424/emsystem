@@ -51,6 +51,15 @@ public interface GradeMajorMapper extends BaseMapper<GradeMajor> {
     @Select({"select major_id from grade_major where grade_id = #{gradeId} and major_name = #{majorName} and user_id = #{userId}"})
     String selectMajorId(@Param("userId") String userId, @Param("gradeId") String gradeId, @Param("majorName") String majorName);
 
+    /**
+     * 根据用户id和年级id查询专业
+     * @param userId
+     * @param gradeId
+     * @return
+     */
+    @Select({"select * from grade_major where user_id = #{userId} and grade_id = #{gradeId}"})
+    List<GradeMajor> getAllMajor(@Param("userId") String userId,@Param("gradeId") String gradeId);
+
 //    @Select({"select count(*) from grade_major where grade_id = #{gradeId} and major_name = #{majorName}"})
 //    Integer selectSize(@Param("gradeId") String gradeId,@Param("majorName") String majorName);
 }

@@ -40,4 +40,10 @@ public interface ClassMapper extends BaseMapper<Class> {
 
     @Delete({"delete from class where class_id = #{classId} and user_id = #{userId};"})
     int deleteClassById(@Param("userId") String userId, @Param("classId") String classId);
+
+    @Select({"select * from class where user_id = #{userId} and major_id = #{majorId}"})
+    List<Class> getClassByMajorId(@Param("userId") String userId,@Param("majorId") Integer majorId);
+
+    @Select({"select major_id from class where user_id = #{userId} and class_id = #{classId}"})
+    String getMajorId(@Param("userId") String userId,@Param("classId") String classId);
 }

@@ -51,4 +51,7 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
 
     @Select({"select * from teacher where t_no = #{teacherNo} and t_password = #{teacherPassword}"})
     Teacher selectUserId(@Param("teacherNo") String teacherNo,@Param("teacherPassword") String teacherPassword);
+
+    @Select({"select * from teacher where user_id = #{userId} and t_name like concat('%', #{teacherName}, '%')"})
+    List<Teacher> getTeacherByName(@Param("userId") String userId,@Param("teacherName") String teacherName);
 }
