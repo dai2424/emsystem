@@ -27,10 +27,9 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
         String courseNo = addPlanParam.getCourseNo();
         String courseName = addPlanParam.getCourseName();
         String creditHour = addPlanParam.getCreditHour();
-        String arrangeTerm = addPlanParam.getArrangeTerm();
 
         if (trainingPlanMapper.selectByNo(userId, courseNo) < 1) {
-            trainingPlanMapper.addPlan(userId, courseNo, courseName, creditHour, arrangeTerm);
+            trainingPlanMapper.addPlan(userId, courseNo, courseName, creditHour);
         }
         else {
             return Result.success(null,"该课程编号已存在");
@@ -45,10 +44,9 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
         String courseNo = editPlanParam.getCourseNo();
         String courseName = editPlanParam.getCourseName();
         String creditHour = editPlanParam.getCreditHour();
-        String arrangeTerm = editPlanParam.getArrangeTerm();
 
         if (trainingPlanMapper.selectByNo(userId, courseNo) > 0) {
-            trainingPlanMapper.editPlan(userId, courseNo, courseName, creditHour, arrangeTerm);
+            trainingPlanMapper.editPlan(userId, courseNo, courseName, creditHour);
         }
         else {
             return Result.success(null,"该课程编号不存在");
@@ -74,9 +72,8 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
         String userId = getAllPlanParam.getUserId();
         String courseNo = getAllPlanParam.getCourseNo();
         String courseName = getAllPlanParam.getCourseName();
-        String arrangeTerm = getAllPlanParam.getArrangeTerm();
 
-        List<PlanVo> plans = trainingPlanMapper.selectAll(userId, courseNo, courseName, arrangeTerm);
+        List<PlanVo> plans = trainingPlanMapper.selectAll(userId, courseNo, courseName);
         return Result.success(new PlanVos(plans), "获取成功");
     }
 }

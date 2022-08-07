@@ -12,5 +12,4 @@ public class TrainingPlan {
 
     private Integer creditHour;
 
-    private Integer arrangeTerm;
 }

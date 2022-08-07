@@ -11,27 +11,25 @@ public interface TrainingPlanMapper extends BaseMapper<TrainingPlan> {
     @Select({"select count(*) from training_plan where user_id = #{userId} and course_no =  #{courseNo}"})
     int selectByNo(@Param("userId") String userId, @Param("courseNo") String courseNo);
 
-    @Insert({"insert into training_plan(user_id, course_no, course_name, credit_hour, arrange_term) " +
-            "values(#{userId}, #{courseNo}, #{courseName}, #{creditHour}, #{arrangeTerm})"})
+    @Insert({"insert into training_plan(user_id, course_no, course_name, credit_hour) " +
+            "values(#{userId}, #{courseNo}, #{courseName}, #{creditHour})"})
     void addPlan(@Param("userId") String userId,
                  @Param("courseNo") String courseNo,
                  @Param("courseName") String courseName,
-                 @Param("creditHour") String creditHour,
-                 @Param("arrangeTerm") String arrangeTerm);
+                 @Param("creditHour") String creditHour);
 
-    @Update({"update training_plan set course_name = #{courseName}, credit_hour = #{creditHour}, arrange_term = #{arrangeTerm} " +
+    @Update({"update training_plan set course_name = #{courseName}, credit_hour = #{creditHour} " +
             "where user_id = #{userId} and course_no = #{courseNo}"})
     void editPlan(@Param("userId") String userId,
                   @Param("courseNo") String courseNo,
                   @Param("courseName") String courseName,
-                  @Param("creditHour") String creditHour,
-                  @Param("arrangeTerm") String arrangeTerm);
+                  @Param("creditHour") String creditHour);
 
     @Delete({"delete from training_plan where user_id = #{userId} and course_no = #{courseNo};"})
     int deletePlan(@Param("userId") String userId,@Param("courseNo") String courseNo);
 
     @Select({"<script> " +
-            "select course_no as courseNo, course_name as courseName, credit_hour as creditHour, arrange_term as arrangeTerm from training_plan " +
+            "select course_no as courseNo, course_name as courseName, credit_hour as creditHour from training_plan " +
                 "<where> " +
                     "<if test = 'userId != null and userId != \"\"' > "+
                         "and user_id = #{userId} " +
@@ -42,15 +40,11 @@ public interface TrainingPlanMapper extends BaseMapper<TrainingPlan> {
                     "<if test = 'courseName != null and courseName != \"\"' > "+
                         "and course_name = #{courseName} " +
                     "</if>" +
-                    "<if test= 'arrangeTerm != null and arrangeTerm != \"\" '>"+
-                        " and arrange_term = #{arrangeTerm} "+
-                    "</if>"+
                 "</where>" +
             "</script>"})
     List<PlanVo> selectAll(@Param("userId") String userId,
                            @Param("courseNo") String courseNo,
-                           @Param("courseName") String courseName,
-                           @Param("arrangeTerm") String arrangeTerm);
+                           @Param("courseName") String courseName);
 
     @Select({"select course_no from training_plan where user_id = #{userId} and course_name = #{courseName};"})
     String selectNobyName(@Param("userId") String userId,@Param("courseName") String courseName);

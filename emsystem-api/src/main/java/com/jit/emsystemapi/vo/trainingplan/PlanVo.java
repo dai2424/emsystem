@@ -10,5 +10,4 @@ public class PlanVo {
 
     private String creditHour;
 
-    private String arrangeTerm;
 }

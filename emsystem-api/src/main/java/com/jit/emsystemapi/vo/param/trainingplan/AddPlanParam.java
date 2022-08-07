@@ -12,5 +12,4 @@ public class AddPlanParam {
 
     private String creditHour;
 
-    private String arrangeTerm;
 }

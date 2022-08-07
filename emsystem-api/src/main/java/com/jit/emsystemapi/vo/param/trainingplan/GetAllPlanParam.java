@@ -10,5 +10,4 @@ public class GetAllPlanParam {
 
     private String courseName;
 
-    private String arrangeTerm;
 }
