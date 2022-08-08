@@ -43,6 +43,7 @@ public class MajorClassServiceImpl implements MajorClassService {
     public Result getAllGrade(GetAllgrade getAllgrade) {
         String userId = getAllgrade.getUserId();
 
+
         List<String> allGrade = gradeMajorMapper.getAllGrade(userId);
 
         List<GradeVo> gradeVos = new ArrayList<>();
