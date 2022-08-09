@@ -1,6 +1,7 @@
 package com.jit.emsystemapi.service.impl;
 
 import com.jit.emsystemapi.dao.mapper.GradeMajorMapper;
+import com.jit.emsystemapi.dao.mapper.SupportMatrixMapper;
 import com.jit.emsystemapi.dao.mapper.TargetPointMapper;
 import com.jit.emsystemapi.dao.pojo.GradeMajor;
 import com.jit.emsystemapi.dao.pojo.GraduationRequirement;
@@ -9,10 +10,9 @@ import com.jit.emsystemapi.service.GradeMajorSercive;
 import com.jit.emsystemapi.service.GraduationRequirementService;
 import com.jit.emsystemapi.service.TargetPointService;
 import com.jit.emsystemapi.vo.Result;
-import com.jit.emsystemapi.vo.param.targetpoint.AddTPParam;
-import com.jit.emsystemapi.vo.param.targetpoint.DeleteTPParam;
-import com.jit.emsystemapi.vo.param.targetpoint.EditTPParam;
-import com.jit.emsystemapi.vo.param.targetpoint.GetAllTP;
+import com.jit.emsystemapi.vo.param.targetpoint.*;
+import com.jit.emsystemapi.vo.targetpoint.ColumnsVo;
+import com.jit.emsystemapi.vo.targetpoint.FieldVo;
 import com.jit.emsystemapi.vo.targetpoint.GetAllVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,8 @@ public class TargetPointServiceImpl implements TargetPointService {
     private GradeMajorSercive gradeMajorSercive;
     @Autowired
     private GraduationRequirementService graduationRequirementService;
+    @Autowired
+    private SupportMatrixMapper supportMatrixMapper;
 
     @Override
     public Result addTargetPoint(AddTPParam addTPParam) {
@@ -97,5 +99,26 @@ public class TargetPointServiceImpl implements TargetPointService {
         }
 
         return Result.success(vos, "获取成功");
+    }
+
+    @Override
+    public Result getCourseTargetPoint(GetCourseTpParam getCourseTpParam) {
+        String userId = getCourseTpParam.getUserId();
+        String courseNo = getCourseTpParam.getCourseNo();
+
+        List<String> TpIds = supportMatrixMapper.getTpIdByCourseNo(userId, courseNo);
+
+        ColumnsVo columnsVo = new ColumnsVo();
+        columnsVo.getColumn().add(new FieldVo("序号", "id"));
+        columnsVo.getColumn().add(new FieldVo("学号","studentNo"));
+        columnsVo.getColumn().add(new FieldVo("姓名","name"));
+        for(String TpId : TpIds) {
+            String TpNo = targetPointMapper.getNoById(userId, TpId);
+            columnsVo.getColumn().add(new FieldVo("指标点" + TpNo, TpId));
+            columnsVo.getColumn().add(new FieldVo("指标点" + TpNo + " 教师成绩", "tScore"));
+            columnsVo.getColumn().add(new FieldVo("指标点" + TpNo + " 学生成绩", "sScore"));
+        }
+
+        return Result.success(columnsVo, "查询成功");
     }
 }

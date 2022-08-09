@@ -59,4 +59,7 @@ public interface TargetPointMapper extends BaseMapper<TargetPoint> {
             "</script>"})
     List<TargetPoint> selectByContent(@Param("userId") String userId,
                                       @Param("content") String pointContent);
+
+    @Select({"select tp_no from target_point where user_id = #{userId} and tp_id = #{tpId}"})
+    String getNoById(@Param("userId") String userId,@Param("tpId") String tpId);
 }

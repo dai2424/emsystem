@@ -48,4 +48,8 @@ public interface SupportMatrixMapper extends BaseMapper<SupportMatrix> {
     List<SupportMatrix> selectCourse(@Param("userId") String userId,
                                      @Param("tpId") String tpId,
                                      @Param("courseNo") String courseNo);
+
+    @Select({"select tp_id from support_matrix where user_id = #{userId} and course_no = #{courseNo};"})
+    List<String> getTpIdByCourseNo(@Param("userId") String userId,
+                                   @Param("courseNo") String courseNo);
 }

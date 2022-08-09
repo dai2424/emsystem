@@ -1,10 +1,7 @@
 package com.jit.emsystemapi.service;
 
 import com.jit.emsystemapi.vo.Result;
-import com.jit.emsystemapi.vo.param.targetpoint.AddTPParam;
-import com.jit.emsystemapi.vo.param.targetpoint.DeleteTPParam;
-import com.jit.emsystemapi.vo.param.targetpoint.EditTPParam;
-import com.jit.emsystemapi.vo.param.targetpoint.GetAllTP;
+import com.jit.emsystemapi.vo.param.targetpoint.*;
 
 public interface TargetPointService {
     Result addTargetPoint(AddTPParam addTPParam);
@@ -14,4 +11,6 @@ public interface TargetPointService {
     Result deleteTargetPoint(DeleteTPParam deleteTPParam);
 
     Result getAllTarget(GetAllTP getAllTP);
+
+    Result getCourseTargetPoint(GetCourseTpParam getCourseTpParam);
 }
