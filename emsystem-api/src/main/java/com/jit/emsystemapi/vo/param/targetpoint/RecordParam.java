@@ -12,5 +12,5 @@ public class RecordParam {
 
     private String classId;
 
-    private List<TPoint> tps;
+    private List<TPoint> needArray;
 }

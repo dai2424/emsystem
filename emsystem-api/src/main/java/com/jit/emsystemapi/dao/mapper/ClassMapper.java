@@ -49,4 +49,7 @@ public interface ClassMapper extends BaseMapper<Class> {
 
     @Select({"select class_name from class where user_id = #{userId} and class_id = #{classId}"})
     String getNameById(@Param("userId") String userId,@Param("classId") Integer classId);
+
+    @Select({"select count(*) from class where user_id = #{userId} and major_id = #{majorId}"})
+    int getClassSize(@Param("userId") String userId,@Param("majorId") String majorId);
 }

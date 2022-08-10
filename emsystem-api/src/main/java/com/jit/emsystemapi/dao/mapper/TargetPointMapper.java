@@ -62,4 +62,10 @@ public interface TargetPointMapper extends BaseMapper<TargetPoint> {
 
     @Select({"select tp_no from target_point where user_id = #{userId} and tp_id = #{tpId}"})
     String getNoById(@Param("userId") String userId,@Param("tpId") String tpId);
+
+    @Select({"select uid from target_point where user_id = #{userId} and tp_id = #{tpId}"})
+    String getUidByTpId(@Param("userId") String userId,@Param("tpId") String tpId);
+
+    @Select({"select count(*) from target_point where user_id = #{userId} and uid = #{uid}"})
+    int getGrSize(@Param("userId") String userId, @Param("uid") String uid);
 }

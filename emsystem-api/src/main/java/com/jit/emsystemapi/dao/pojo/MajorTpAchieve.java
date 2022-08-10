@@ -8,6 +8,8 @@ public class MajorTpAchieve {
 
     private Integer majorId;
 
+    private Integer uid;
+
     private Integer tpId;
 
     private Integer achievement;

@@ -52,4 +52,12 @@ public interface SupportMatrixMapper extends BaseMapper<SupportMatrix> {
     @Select({"select tp_id from support_matrix where user_id = #{userId} and course_no = #{courseNo};"})
     List<String> getTpIdByCourseNo(@Param("userId") String userId,
                                    @Param("courseNo") String courseNo);
+
+    @Select({"select support_degree from support_matrix where user_id = #{userId} and course_no = #{courseNo} and tp_id = #{tpId};"})
+    Integer getSupportDegree(@Param("userId") String userId,
+                             @Param("courseNo") String courseNo,
+                             @Param("tpId") String tpId);
+
+    @Select({"select sum(support_degree) from support_matrix where user_id = #{userId} and tp_id = #{tpId};"})
+    Integer getVectorDegree(@Param("userId") String userId,@Param("tpId") String tpId);
 }

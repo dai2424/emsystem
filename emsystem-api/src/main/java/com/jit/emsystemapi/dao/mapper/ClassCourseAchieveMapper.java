@@ -28,4 +28,21 @@ public interface ClassCourseAchieveMapper extends BaseMapper<ClassCourseAchieve>
                     @Param("tNo") String teacherNo,
                     @Param("cNo") String courseNo,
                     @Param("classId") String classId);
+
+    @Update("update class_course_achieve set achievement = #{achievement} where user_id = #{userId} and class_id = #{classId} and course_no = #{courseNo} and tp_id = #{tpId};")
+    void updateAchieve(@Param("userId") String userId,
+                       @Param("classId") String classId,
+                       @Param("courseNo") String courseNo,
+                       @Param("tpId") String tpId,
+                       @Param("achievement") Integer achievement);
+
+    @Select({"select count(*) from class_course_achieve where user_id = #{userId} and class_id = #{classId} and tp_id = #{tpId} and achievement is NULL;"})
+    int getAchieveIsNull(@Param("userId") String userId,
+                         @Param("classId") String classId,
+                         @Param("tpId") String tpId);
+
+    @Select({"select sum(achievement) from class_course_achieve where user_id = #{userId} and tp_id = #{tpId} and class_id = #{classId};"})
+    Integer getAchieveVectorDegree(@Param("userId") String userId,
+                                   @Param("classId") String classId,
+                                   @Param("tpId") String tpId);
 }

@@ -26,4 +26,10 @@ public interface TargetSupportMapper extends BaseMapper<TargetSupport> {
 
     @Select({"select rank_num from target_support where user_id = #{userId} and type_encoding = '学生评分占比';"})
     Integer getStudentPercent(@Param("userId") String userId);
+
+    @Select({"select rank_num from target_support where user_id = #{userId} and type_encoding = '评价等级'"})
+    Integer getMaxEstimate(@Param("userId") String userId);
+
+    @Select({"select rank_num from target_support where user_id = #{userId} and type_encoding = '达成度'"})
+    int getMaxAchievement(@Param("userId") String userId);
 }

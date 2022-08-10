@@ -69,4 +69,8 @@ public interface GraduationRequirementMapper extends BaseMapper<GraduationRequir
                 "</where>"+
             "</script>"})
     List<GraduationRequirement> selectUids(@Param("userId") String userId,@Param("majorId") Integer majorId,@Param("no") String graduationNo);
+
+    @Select({"select * from graduation_requirement where user_id = #{userId} and uid = #{uid}"})
+    GraduationRequirement getGrByUid(@Param("userId") String userId,
+                                     @Param("uid") Integer uid);
 }

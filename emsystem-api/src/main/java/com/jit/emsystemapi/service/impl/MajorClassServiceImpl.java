@@ -2,7 +2,7 @@ package com.jit.emsystemapi.service.impl;
 
 import com.jit.emsystemapi.dao.mapper.ClassMapper;
 import com.jit.emsystemapi.dao.mapper.GradeMajorMapper;
-import com.jit.emsystemapi.service.GradeMajorSercive;
+import com.jit.emsystemapi.service.GradeMajorService;
 import com.jit.emsystemapi.service.MajorClassService;
 import com.jit.emsystemapi.vo.*;
 import com.jit.emsystemapi.vo.GMC.*;
@@ -22,7 +22,7 @@ public class MajorClassServiceImpl implements MajorClassService {
     @Autowired
     private GradeMajorMapper gradeMajorMapper;
     @Autowired
-    private GradeMajorSercive gradeMajorSercive;
+    private GradeMajorService gradeMajorSercive;
 
     @Override
     public Result getAllMajorClass(MajorClassParam majorClassParam) {

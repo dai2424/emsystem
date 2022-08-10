@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class TPoint {
-    private String tpId;
+    private String pointId;
 
     private String teacherEstimate;
 
     private String studentEstimate;
+
 }
