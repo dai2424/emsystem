@@ -22,6 +22,11 @@ public class TargetPointController {
     @Autowired
     private TargetPointService targetPointService;
 
+    @PostMapping("recordCourseScore")
+    public Result recordCourseScore(@RequestBody RecordParam recordParam) {
+        return targetPointService.recordCourseScore(recordParam);
+    }
+
     @PostMapping("addTargetPoint")
     public Result addTargetPoint(@RequestBody AddTPParam addTPParam) {
         return targetPointService.addTargetPoint(addTPParam);

@@ -13,4 +13,6 @@ public interface TargetPointService {
     Result getAllTarget(GetAllTP getAllTP);
 
     Result getCourseTargetPoint(GetCourseTpParam getCourseTpParam);
+
+    Result recordCourseScore(RecordParam recordParam);
 }

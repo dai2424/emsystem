@@ -3,6 +3,7 @@ package com.jit.emsystemapi.service.impl;
 import com.jit.emsystemapi.dao.mapper.GradeMajorMapper;
 import com.jit.emsystemapi.dao.mapper.SupportMatrixMapper;
 import com.jit.emsystemapi.dao.mapper.TargetPointMapper;
+import com.jit.emsystemapi.dao.mapper.TargetSupportMapper;
 import com.jit.emsystemapi.dao.pojo.GradeMajor;
 import com.jit.emsystemapi.dao.pojo.GraduationRequirement;
 import com.jit.emsystemapi.dao.pojo.TargetPoint;
@@ -20,7 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -33,6 +36,8 @@ public class TargetPointServiceImpl implements TargetPointService {
     private GraduationRequirementService graduationRequirementService;
     @Autowired
     private SupportMatrixMapper supportMatrixMapper;
+    @Autowired
+    private TargetSupportMapper targetSupportMapper;
 
     @Override
     public Result addTargetPoint(AddTPParam addTPParam) {
@@ -122,5 +127,25 @@ public class TargetPointServiceImpl implements TargetPointService {
         }
 
         return Result.success(columnsVo, "查询成功");
+    }
+
+    @Override
+    public Result recordCourseScore(RecordParam recordParam) {
+        String userId = recordParam.getUserId();
+        String courseNo = recordParam.getCourseNo();
+        String classId = recordParam.getClassId();
+        List<TPoint> tps = recordParam.getTps();
+
+        List<String> tpIds = supportMatrixMapper.getTpIdByCourseNo(userId, courseNo);
+
+        /* 获取老师和学生的评价成绩占比 */
+        Integer sPercent = targetSupportMapper.getStudentPercent(userId);
+        Integer tPercent =  10 - sPercent;
+
+        /* 解析*/
+//        Map<String, List<Integer>> tpScores = new HashMap<>();
+//        tpScores.
+
+        return null;
     }
 }

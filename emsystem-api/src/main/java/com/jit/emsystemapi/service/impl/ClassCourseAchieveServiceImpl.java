@@ -59,7 +59,7 @@ public class ClassCourseAchieveServiceImpl implements ClassCourseAchieveService 
                     Integer classId = plan.getClassId();
                     String className = classMapper.getNameById(userId, classId);
                     Boolean status = classCourseAchieveMapper.getStatus(userId, tNo, classId, cNo);
-                    srVos.add(new ScoreRecordedVo(tNo, tName, cNo, cName, className, plan.getArrangeTerm(), status));
+                    srVos.add(new ScoreRecordedVo(tNo, tName, cNo, cName, className, plan.getArrangeTerm(), status, classId));
                 }
             }
         }
@@ -88,7 +88,7 @@ public class ClassCourseAchieveServiceImpl implements ClassCourseAchieveService 
                 Integer classId = plan.getClassId();
                 String className = classMapper.getNameById(userId, classId);
                 Boolean status = classCourseAchieveMapper.getStatus(userId, teacherNo, classId, cNo);
-                srVos.add(new ScoreRecordedVo(teacherNo, teacherName, cNo, cName, className, plan.getArrangeTerm(), status));
+                srVos.add(new ScoreRecordedVo(teacherNo, teacherName, cNo, cName, className, plan.getArrangeTerm(), status, classId));
             }
         }
         
