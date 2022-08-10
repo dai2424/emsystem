@@ -14,6 +14,7 @@ import com.jit.emsystemapi.vo.param.targetpoint.*;
 import com.jit.emsystemapi.vo.targetpoint.ColumnsVo;
 import com.jit.emsystemapi.vo.targetpoint.FieldVo;
 import com.jit.emsystemapi.vo.targetpoint.GetAllVo;
+import com.jit.emsystemapi.vo.targetpoint.TpVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -117,6 +118,7 @@ public class TargetPointServiceImpl implements TargetPointService {
             columnsVo.getColumn().add(new FieldVo("指标点Id"  +"(" + TpId + ")", "指标点Id"  +"(" + TpId + ")"));
             columnsVo.getColumn().add(new FieldVo("指标点(" + TpNo + ")教师评成绩", "指标点(" + TpNo + ")教师评成绩"));
             columnsVo.getColumn().add(new FieldVo("指标点(" + TpNo + ")学生评成绩", "指标点(" + TpNo + ")学生评成绩"));
+            columnsVo.getPoints().add(new TpVo(TpId, TpNo));
         }
 
         return Result.success(columnsVo, "查询成功");
