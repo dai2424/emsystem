@@ -109,14 +109,14 @@ public class TargetPointServiceImpl implements TargetPointService {
         List<String> TpIds = supportMatrixMapper.getTpIdByCourseNo(userId, courseNo);
 
         ColumnsVo columnsVo = new ColumnsVo();
-        columnsVo.getColumn().add(new FieldVo("序号", "id"));
-        columnsVo.getColumn().add(new FieldVo("学号","studentNo"));
-        columnsVo.getColumn().add(new FieldVo("姓名","name"));
+        columnsVo.getColumn().add(new FieldVo("序号", "序号"));
+        columnsVo.getColumn().add(new FieldVo("学号","学号"));
+        columnsVo.getColumn().add(new FieldVo("姓名","姓名"));
         for(String TpId : TpIds) {
             String TpNo = targetPointMapper.getNoById(userId, TpId);
-            columnsVo.getColumn().add(new FieldVo("指标点" + TpNo, TpId));
-            columnsVo.getColumn().add(new FieldVo("指标点" + TpNo + " 教师成绩", "tScore"));
-            columnsVo.getColumn().add(new FieldVo("指标点" + TpNo + " 学生成绩", "sScore"));
+            columnsVo.getColumn().add(new FieldVo("指标点Id"  +"(" + TpId + ")", "指标点Id"  +"(" + TpId + ")"));
+            columnsVo.getColumn().add(new FieldVo("指标点(" + TpNo + ")教师评成绩", "指标点(" + TpNo + ")教师评成绩"));
+            columnsVo.getColumn().add(new FieldVo("指标点(" + TpNo + ")学生评成绩", "指标点(" + TpNo + ")学生评成绩"));
         }
 
         return Result.success(columnsVo, "查询成功");
