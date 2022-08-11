@@ -21,7 +21,7 @@ public interface MajorGrAchieveMapper extends BaseMapper<MajorGrAchieve> {
                  @Param("achievement") Integer grAchievement,
                  @Param("majorId") String majorId);
 
-    @Update({"update major_gr_achieve set achievement = #{achievement} where user_id = #{userId} and uid = #{uid}, major_id = #{majorId};"})
+    @Update({"update major_gr_achieve set achievement = #{achievement} where user_id = #{userId} and uid = #{uid} and major_id = #{majorId};"})
     void upDate(@Param("userId") String userId,
                 @Param("uid") String uid,
                 @Param("achievement") Integer grAchievement,
