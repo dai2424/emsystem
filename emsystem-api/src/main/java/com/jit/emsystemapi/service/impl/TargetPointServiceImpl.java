@@ -214,12 +214,12 @@ public class TargetPointServiceImpl implements TargetPointService {
             Integer uid = mgra.getUId();
             GraduationRequirement gr = graduationRequirementMapper.getGrByUid(userId, uid);
 
-            GraduationReqAchievementVo gra = new GraduationReqAchievementVo(grAchievement, gr.getNo(), gr.getContent());
+            GraduationReqAchievementVo gra = new GraduationReqAchievementVo(grAchievement,"毕业要求:" + gr.getNo(), gr.getContent());
             List<MajorTpAchieve> tpAchievements = majorTpAchieveMapper.getTpsAchievement(userId, uid);
             for(MajorTpAchieve tpAchievement : tpAchievements) {
                 Integer tpId = tpAchievement.getTpId();
                 TargetPoint tp = targetPointMapper.getTpById(userId, tpId);
-                TargetPointAchievementVo tpAchievementVo = new TargetPointAchievementVo(tpAchievement.getAchievement(), tp.getTpNo(), tp.getContent());
+                TargetPointAchievementVo tpAchievementVo = new TargetPointAchievementVo(tpAchievement.getAchievement(), "指标点" + tp.getTpNo(), tp.getContent());
                 gra.getChildren().add(tpAchievementVo);
             }
             if(!gra.getChildren().isEmpty()) {
@@ -243,13 +243,13 @@ public class TargetPointServiceImpl implements TargetPointService {
             Integer uid = cgra.getUid();
             GraduationRequirement gr = graduationRequirementMapper.getGrByUid(userId, uid);
 
-            GraduationReqAchievementVo gra = new GraduationReqAchievementVo(grAchievement, gr.getNo(), gr.getContent());
+            GraduationReqAchievementVo gra = new GraduationReqAchievementVo(grAchievement,"毕业要求:" + gr.getNo(), gr.getContent());
 
             List<ClassTpAchieve> tpAchievements = classTpAchieveMapper.getTpsAchievement(userId, uid, classId);
             for(ClassTpAchieve tpAchievement : tpAchievements) {
                 Integer tpId = tpAchievement.getTpId();
                 TargetPoint tp = targetPointMapper.getTpById(userId, tpId);
-                TargetPointAchievementVo tpAchievementVo = new TargetPointAchievementVo(tpAchievement.getAchievement(), tp.getTpNo(), tp.getContent());
+                TargetPointAchievementVo tpAchievementVo = new TargetPointAchievementVo(tpAchievement.getAchievement(),"指标点" + tp.getTpNo(), tp.getContent());
                 gra.getChildren().add(tpAchievementVo);
             }
             if(!gra.getChildren().isEmpty()) {
