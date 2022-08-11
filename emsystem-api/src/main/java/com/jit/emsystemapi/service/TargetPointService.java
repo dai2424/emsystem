@@ -2,6 +2,7 @@ package com.jit.emsystemapi.service;
 
 import com.jit.emsystemapi.vo.Result;
 import com.jit.emsystemapi.vo.param.targetpoint.*;
+import com.jit.emsystemapi.vo.param.viewachievement.ViewClassParam;
 import com.jit.emsystemapi.vo.param.viewachievement.ViewMajorParam;
 
 public interface TargetPointService {
@@ -18,4 +19,6 @@ public interface TargetPointService {
     Result recordCourseScore(RecordParam recordParam);
 
     Result viewMajorAchievement(ViewMajorParam viewMajorParam);
+
+    Result viewClassAchievement(ViewClassParam viewClassParam);
 }

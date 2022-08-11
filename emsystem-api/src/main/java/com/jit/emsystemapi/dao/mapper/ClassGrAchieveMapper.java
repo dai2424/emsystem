@@ -2,7 +2,10 @@ package com.jit.emsystemapi.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jit.emsystemapi.dao.pojo.ClassGrAchieve;
+import com.jit.emsystemapi.dao.pojo.MajorGrAchieve;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface ClassGrAchieveMapper extends BaseMapper<ClassGrAchieve> {
@@ -27,4 +30,7 @@ public interface ClassGrAchieveMapper extends BaseMapper<ClassGrAchieve> {
                 @Param("achievement") Integer grAchievement);
 
 
+    @Select({"select * from class_gr_achieve where user_id = #{userId} and class_id = #{classId}"})
+    List<ClassGrAchieve> getMGAs(@Param("userId") String userId,
+                                 @Param("classId") String classId);
 }

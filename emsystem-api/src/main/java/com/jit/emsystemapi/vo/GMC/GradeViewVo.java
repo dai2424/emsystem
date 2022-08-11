@@ -11,7 +11,7 @@ public class GradeViewVo {
 
     private String label;
 
-    private List<MajorVo> children;
+    private List<ViewMajorVo> children;
 
     public GradeViewVo(String value, String label) {
         this.value = value;

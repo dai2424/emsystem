@@ -1,22 +1,20 @@
 package com.jit.emsystemapi.service.impl;
 
 import com.jit.emsystemapi.dao.mapper.*;
-import com.jit.emsystemapi.dao.pojo.GradeMajor;
-import com.jit.emsystemapi.dao.pojo.GraduationRequirement;
-import com.jit.emsystemapi.dao.pojo.MajorGrAchieve;
-import com.jit.emsystemapi.dao.pojo.TargetPoint;
+import com.jit.emsystemapi.dao.pojo.*;
 import com.jit.emsystemapi.service.GradeMajorService;
 import com.jit.emsystemapi.service.GraduationRequirementService;
 import com.jit.emsystemapi.service.TargetPointService;
-import com.jit.emsystemapi.vo.GMC.ViewGMVo;
 import com.jit.emsystemapi.vo.Result;
 import com.jit.emsystemapi.vo.param.targetpoint.*;
+import com.jit.emsystemapi.vo.param.viewachievement.ViewClassParam;
 import com.jit.emsystemapi.vo.param.viewachievement.ViewMajorParam;
 import com.jit.emsystemapi.vo.targetpoint.ColumnsVo;
 import com.jit.emsystemapi.vo.targetpoint.FieldVo;
 import com.jit.emsystemapi.vo.targetpoint.GetAllVo;
 import com.jit.emsystemapi.vo.targetpoint.TpVo;
 import com.jit.emsystemapi.vo.viewachievement.GraduationReqAchievementVo;
+import com.jit.emsystemapi.vo.viewachievement.TargetPointAchievementVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -217,10 +215,48 @@ public class TargetPointServiceImpl implements TargetPointService {
             GraduationRequirement gr = graduationRequirementMapper.getGrByUid(userId, uid);
 
             GraduationReqAchievementVo gra = new GraduationReqAchievementVo(grAchievement, gr.getNo(), gr.getContent());
-
+            List<MajorTpAchieve> tpAchievements = majorTpAchieveMapper.getTpsAchievement(userId, uid);
+            for(MajorTpAchieve tpAchievement : tpAchievements) {
+                Integer tpId = tpAchievement.getTpId();
+                TargetPoint tp = targetPointMapper.getTpById(userId, tpId);
+                TargetPointAchievementVo tpAchievementVo = new TargetPointAchievementVo(tpAchievement.getAchievement(), tp.getTpNo(), tp.getContent());
+                gra.getChildren().add(tpAchievementVo);
+            }
+            if(!gra.getChildren().isEmpty()) {
+                grAchievements.add(gra);
+            }
 
         }
-        return  null;
+        return Result.success(grAchievements, "查询成功");
+    }
+
+    @Override
+    public Result viewClassAchievement(ViewClassParam viewClassParam) {
+        String classId = viewClassParam.getClassId();
+        String userId = viewClassParam.getUserId();
+
+        List<GraduationReqAchievementVo> grAchievements = new ArrayList<>();
+        List<ClassGrAchieve> cgras = classGrAchieveMapper.getMGAs(userId, classId);
+
+        for (ClassGrAchieve cgra : cgras) {
+            String grAchievement = String.valueOf(cgra.getAchievement());
+            Integer uid = cgra.getUid();
+            GraduationRequirement gr = graduationRequirementMapper.getGrByUid(userId, uid);
+
+            GraduationReqAchievementVo gra = new GraduationReqAchievementVo(grAchievement, gr.getNo(), gr.getContent());
+
+            List<ClassTpAchieve> tpAchievements = classTpAchieveMapper.getTpsAchievement(userId, uid, classId);
+            for(ClassTpAchieve tpAchievement : tpAchievements) {
+                Integer tpId = tpAchievement.getTpId();
+                TargetPoint tp = targetPointMapper.getTpById(userId, tpId);
+                TargetPointAchievementVo tpAchievementVo = new TargetPointAchievementVo(tpAchievement.getAchievement(), tp.getTpNo(), tp.getContent());
+                gra.getChildren().add(tpAchievementVo);
+            }
+            if(!gra.getChildren().isEmpty()) {
+                grAchievements.add(gra);
+            }
+        }
+        return Result.success(grAchievements, "查询成功");
     }
 
     private void classTargetPointAchieveUpdate(String userId, String classId, String tpId) {

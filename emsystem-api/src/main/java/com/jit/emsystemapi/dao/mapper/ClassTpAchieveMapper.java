@@ -2,7 +2,10 @@ package com.jit.emsystemapi.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jit.emsystemapi.dao.pojo.ClassTpAchieve;
+import com.jit.emsystemapi.dao.pojo.MajorTpAchieve;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface ClassTpAchieveMapper extends BaseMapper<ClassTpAchieve> {
@@ -44,4 +47,9 @@ public interface ClassTpAchieveMapper extends BaseMapper<ClassTpAchieve> {
     Integer getMajorAchieve(@Param("userId") String userId,
                         @Param("tpId") String tpId,
                         @Param("majorId") String majorId);
+
+    @Select({"select * from class_tp_achieve where user_id = #{userId} and uid = #{uid} and class_id = #{classId}"})
+    List<ClassTpAchieve> getTpsAchievement(@Param("userId") String userId,
+                                           @Param("uid") Integer uid,
+                                           @Param("classId") String classId);
 }

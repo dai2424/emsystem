@@ -8,12 +8,14 @@ import com.jit.emsystemapi.service.GradeMajorService;
 import com.jit.emsystemapi.vo.GMC.GradeViewVo;
 import com.jit.emsystemapi.vo.GMC.MajorVo;
 import com.jit.emsystemapi.vo.GMC.ViewGMVo;
+import com.jit.emsystemapi.vo.GMC.ViewMajorVo;
 import com.jit.emsystemapi.vo.Result;
 import com.jit.emsystemapi.vo.param.GMC.GetGradeMajorParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.View;
 import java.util.List;
 
 @Service
@@ -42,7 +44,10 @@ public class GradeMajorServiceImpl implements GradeMajorService {
             GradeViewVo gVo = new GradeViewVo(gradeId, gradeId + "级");
 
             List<MajorVo> majors = gradeMajorMapper.getMajorByGradeId(userId, gradeId);
-            gVo.getChildren().addAll(majors);
+
+            for (MajorVo majorVo : majors) {
+                gVo.getChildren().add(new ViewMajorVo(majorVo.getId(), majorVo.getLabel()));
+            }
             if(!gVo.getChildren().isEmpty()) {
                 gmVo.getOptions().add(gVo);
             }

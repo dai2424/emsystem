@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jit.emsystemapi.dao.pojo.MajorTpAchieve;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface MajorTpAchieveMapper extends BaseMapper<MajorTpAchieve> {
 
@@ -34,4 +36,8 @@ public interface MajorTpAchieveMapper extends BaseMapper<MajorTpAchieve> {
     Integer getGrAchievement(@Param("userId") String userId,
                              @Param("uid") String uid,
                              @Param("majorId") String majorId);
+
+    @Select({"select * from major_tp_achieve where user_id = #{userId} and uid = #{uid};"})
+    List<MajorTpAchieve> getTpsAchievement(@Param("userId") String userId,
+                                           @Param("uid") Integer uid);
 }
